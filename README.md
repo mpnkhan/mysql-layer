@@ -23,4 +23,4 @@ db.tep_db_connect(host,user,password,database)
 
 ## Copyright and License
 
-Copyright 2017, PayPal under [the BSD2 license](LICENSE.md).
+Copyright 2017, Nawaz under [the BSD2 license](LICENSE.md).
