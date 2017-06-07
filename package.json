@@ -1,0 +1,26 @@
+{
+  "name": "mysql-layer",
+  "version": "1.0.0",
+  "description": "A simple Layer for mysql with promises",
+  "main": "test.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mpnkhan/mysql-layer.git"
+  },
+  "keywords": [
+    "mysql",
+    "nodejs"
+  ],
+  "author": "Prem Nawaz Khan",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/mpnkhan/mysql-layer/issues"
+  },
+  "homepage": "https://github.com/mpnkhan/mysql-layer#readme",
+  "devDependencies": {
+    "mysql": "github:mysqljs/mysql"
+  }
+}
