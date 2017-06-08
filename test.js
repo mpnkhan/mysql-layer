@@ -1,19 +1,29 @@
-var db = require('./database.js');
+var db = require('./database');
 
 const  host = 'localhost';
 const user ='root';
 const password ='';
 const database = 'showcase';
 
-db.tep_db_connect(host,user,password,database)
+db.db_connect(host,user,password,database)
   .then(function(){
-    db.tep_db_query('SELECT * FROM `tour` AS solution')
+    db.db_query('SELECT * FROM `tour` AS solution')
     .then(function(rows){
       // console.log(rows);
     })
   })
   .then(function(){
-  	db.tep_db_insert('tour', {'location': 'Singapore', 'maxperson':'11'})
+    var cols = ['location', 'maxperson'];
+    var whereObj = {'tourid':28 , 'maxperson' : 3}        
+    db.db_select("tour" , cols, whereObj)
+    // db.db_select("tour" , '*')   //For selecting all columns in the table
+    .then(function(rows){
+      console.log(rows);
+    })
+  })
+  
+  .then(function(){
+  	db.db_insert('tour', {'location': 'Singapore', 'maxperson':'11'})
   	.then(function(insID){
       insertID= insID
 		  console.log('Insert id', insID);
@@ -22,19 +32,19 @@ db.tep_db_connect(host,user,password,database)
   .then( function(){
     var cols = {'location': 'Chennai', 'maxperson':'3'};
     var whereObj = {'tourid':30 , 'maxperson' : 11}
-    db.tep_db_update("tour" , cols, whereObj)
+    db.db_update("tour" , cols, whereObj)
       .then(function(changedRows){
         console.log('Changed Rows', changedRows);
       })
   })
   .then( function(){
     var whereObj = {'tourid':38 , 'maxperson' : 11}
-    db.tep_db_delete("tour" , whereObj)
+    db.db_delete("tour" , whereObj)
       .then(function(affectedRows){
         console.log('Affected Rows', affectedRows);
       })
   })
 
   .then(function(){
-    db.tep_db_close();  
+    db.db_close();  
 })

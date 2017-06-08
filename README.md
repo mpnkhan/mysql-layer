@@ -9,15 +9,17 @@ A simple Layer for mysql with promises
 ## Usage
 Please see test.js on how to use
 ```javascript
-db.tep_db_connect(host,user,password,database)
+db.db_connect(host,user,password,database)
   .then(function(){
-    db.tep_db_query('SELECT * FROM `tour` AS solution')
+    var cols = ['location', 'maxperson'];
+    var whereObj = {'tourid':28 , 'maxperson' : 3}        
+    db.db_select("tour" , cols, whereObj)
     .then(function(rows){
       console.log(rows);
     })
   })
   .then(function(){
-    db.tep_db_close();  
+    db.db_close();  
 })
 ```
 

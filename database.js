@@ -4,7 +4,7 @@
 
   module.exports = {
     results:'',
-    tep_db_connect: function (server, username, password, database) {
+    db_connect: function (server, username, password, database) {
       return new Promise(function(resolve, reject) {
         connection = mysql.createConnection({
           host     : server,
@@ -20,7 +20,7 @@
         });
       }) 
     },
-    tep_db_query: function (query) {
+    db_query: function (query) {
       return new Promise(function(resolve, reject) {
         connection.query(query, function (err, results, fields) {
           if (err) reject(err);
@@ -28,7 +28,26 @@
         })
       });  
     },
-    tep_db_insert: function (tablename, jsObj) {
+    db_select: function (tablename, colsObj , whereObj) {
+      return new Promise(function(resolve, reject) {
+        var sql =  'SELECT ';
+        for (let column in colsObj) {
+         sql +=  colsObj[column] + ', ';
+        }
+        sql= sql.substring(0, (sql.length-2));
+        sql +=  ' FROM '+ tablename ;
+        sql += ' WHERE 1 '
+        for (let column in whereObj) {
+           sql +=  'AND '+ column + ' = \'' + escape(whereObj[column]) + '\'';
+        }
+        console.log(sql);
+        connection.query(sql, function (err, results, fields) {
+          if (err) reject(err);
+          resolve(results);
+        })
+      })
+    },    
+    db_insert: function (tablename, jsObj) {
       return new Promise(function(resolve, reject) {
         var query = connection.query('INSERT INTO '+ tablename +' SET ?', jsObj, function(err, result) {
           if (err) reject(err);
@@ -37,7 +56,7 @@
         // console.log(query.sql);
       })
     },
-    tep_db_update: function (tablename, colsObj , whereObj) {
+    db_update: function (tablename, colsObj , whereObj) {
       return new Promise(function(resolve, reject) {
         var sql =  'UPDATE ' + tablename +' SET ';
         for (let column in colsObj) {
@@ -49,7 +68,6 @@
            sql +=  'AND '+ column + ' = \'' + escape(whereObj[column]) + '\'';
         }
         // console.log(sql);
-        var query = connection.query(sql);
         connection.query(sql, function (err, results, fields) {
           if (err) reject(err);
           // console.log(results, fields);
@@ -57,7 +75,7 @@
         })
       })
     },
-    tep_db_delete: function (tablename, whereObj) {
+    db_delete: function (tablename, whereObj) {
       return new Promise(function(resolve, reject) {
         var sql =  'DELETE FROM ' + tablename + ' WHERE 1 ';
         for (let column in whereObj) {
@@ -72,7 +90,7 @@
         })
       })
     },
-    tep_db_close(){
+    db_close(){
       connection.end();      
     }
   };
