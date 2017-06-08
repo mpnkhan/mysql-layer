@@ -40,9 +40,12 @@ db.db_connect(host,user,password,database)
   .then( function(){
     var whereObj = {'tourid':65 , 'maxperson' : 11}
     db.db_delete("tour")
-      .then(function(affectedRows, whereObj){
+      .then(function(affectedRows){
         console.log('Affected Rows', affectedRows);
       })
+      .catch(function (err) {
+        console.log("Promise Rejected: " + err);
+      });
   })
 
   .then(function(){
