@@ -40,7 +40,7 @@
         for (let column in whereObj) {
            sql +=  'AND '+ column + ' = \'' + escape(whereObj[column]) + '\'';
         }
-        console.log(sql);
+        // console.log(sql);
         connection.query(sql, function (err, results, fields) {
           if (err) reject(err);
           resolve(results);
