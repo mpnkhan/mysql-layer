@@ -14,7 +14,7 @@ db.db_connect(host,user,password,database)
   })
   .then(function(){
     var cols = ['location', 'maxperson'];
-    var whereObj = {'tourid':28 , 'maxperson' : 3}        
+    var whereObj = {'tourid':62 , 'maxperson' : 3}
     db.db_select("tour" , cols, whereObj)
     // db.db_select("tour" , '*')   //For selecting all columns in the table
     .then(function(rows){
@@ -31,16 +31,16 @@ db.db_connect(host,user,password,database)
   })
   .then( function(){
     var cols = {'location': 'Chennai', 'maxperson':'3'};
-    var whereObj = {'tourid':30 , 'maxperson' : 11}
+    var whereObj = {'tourid':62 , 'maxperson' : 11}
     db.db_update("tour" , cols, whereObj)
       .then(function(changedRows){
         console.log('Changed Rows', changedRows);
       })
   })
   .then( function(){
-    var whereObj = {'tourid':38 , 'maxperson' : 11}
-    db.db_delete("tour" , whereObj)
-      .then(function(affectedRows){
+    var whereObj = {'tourid':65 , 'maxperson' : 11}
+    db.db_delete("tour")
+      .then(function(affectedRows, whereObj){
         console.log('Affected Rows', affectedRows);
       })
   })

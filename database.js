@@ -77,6 +77,11 @@
     },
     db_delete: function (tablename, whereObj) {
       return new Promise(function(resolve, reject) {
+        if(whereObj == null){
+          var err ='Missing `WHERE` clause in `DELETE` query';
+          reject(err);
+          return;
+        }
         var sql =  'DELETE FROM ' + tablename + ' WHERE 1 ';
         for (let column in whereObj) {
            sql +=  'AND '+ column + ' = \'' + escape(whereObj[column]) + '\'';
