@@ -31,13 +31,13 @@
     db_select: function (tablename, colsObj , whereObj) {
       return new Promise(function(resolve, reject) {
         var sql =  'SELECT ';
-        for (let column in colsObj) {
+        for (var column in colsObj) {
          sql +=  colsObj[column] + ', ';
         }
         sql= sql.substring(0, (sql.length-2));
         sql +=  ' FROM '+ tablename ;
         sql += ' WHERE 1 '
-        for (let column in whereObj) {
+        for (var column in whereObj) {
            sql +=  'AND '+ column + ' = \'' + escape(whereObj[column]) + '\'';
         }
         // console.log(sql);
@@ -59,12 +59,12 @@
     db_update: function (tablename, colsObj , whereObj) {
       return new Promise(function(resolve, reject) {
         var sql =  'UPDATE ' + tablename +' SET ';
-        for (let column in colsObj) {
+        for (var column in colsObj) {
            sql +=  column + ' = \'' + escape(colsObj[column]) + '\', ';
         }
         sql= sql.substring(0, (sql.length-2));
         sql += ' WHERE 1 '
-        for (let column in whereObj) {
+        for (var column in whereObj) {
            sql +=  'AND '+ column + ' = \'' + escape(whereObj[column]) + '\'';
         }
         // console.log(sql);
@@ -83,7 +83,7 @@
           return;
         }
         var sql =  'DELETE FROM ' + tablename + ' WHERE 1 ';
-        for (let column in whereObj) {
+        for (var column in whereObj) {
            sql +=  'AND '+ column + ' = \'' + escape(whereObj[column]) + '\'';
         }
         // console.log(sql);
@@ -95,7 +95,7 @@
         })
       })
     },
-    db_close(){
+    db_close: function(){
       connection.end();      
     }
   };
