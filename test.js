@@ -25,9 +25,11 @@ db.db_connect(host,user,password,database)
   .then(function(){
   	db.db_insert('tour', {'location': 'Singapore', 'maxperson':'11'})
   	.then(function(insID){
-      insertID= insID
-		  console.log('Insert id: ', insID);
+      		insertID= insID
+  	 	console.log('Insert id: ', insID);
   	})
+  	.error(function(e){console.log("Error handler " + e)})
+  	.catch(function(e){console.log("Catch handler " + e)});		
   })
   .then( function(){
     var cols = {'location': 'Chennai', 'maxperson':'3'};

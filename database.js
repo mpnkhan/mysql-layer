@@ -16,7 +16,7 @@
           if (err) {
             reject(err);
           }
-          resolve(connection.threadId);
+          else resolve(connection.threadId);
         });
       }) 
     },
@@ -24,7 +24,7 @@
       return new Promise(function(resolve, reject) {
         connection.query(query, function (err, results, fields) {
           if (err) reject(err);
-          resolve(results);
+          else resolve(results);
         })
       });  
     },
@@ -43,7 +43,7 @@
         // console.log(sql);
         connection.query(sql, function (err, results, fields) {
           if (err) reject(err);
-          resolve(results);
+          else resolve(results);
         })
       })
     },    
@@ -51,7 +51,7 @@
       return new Promise(function(resolve, reject) {
         var query = connection.query('INSERT INTO '+ tablename +' SET ?', jsObj, function(err, result) {
           if (err) reject(err);
-          resolve(result.insertId);
+          else resolve(result.insertId);
         });
         // console.log(query.sql);
       })
@@ -71,7 +71,7 @@
         connection.query(sql, function (err, results, fields) {
           if (err) reject(err);
           // console.log(results, fields);
-          resolve(results.changedRows);
+          else resolve(results.changedRows);
         })
       })
     },
@@ -79,8 +79,7 @@
       return new Promise(function(resolve, reject) {
         if(whereObj == null){
           var err ='Missing `WHERE` clause in `DELETE` query';
-          reject(err);
-          return;
+          return reject(err);
         }
         var sql =  'DELETE FROM ' + tablename + ' WHERE 1 ';
         for (var column in whereObj) {
@@ -91,7 +90,7 @@
         connection.query(sql, function (err, results, fields) {
           if (err) reject(err);
           // console.log(results, fields);
-          resolve(results.affectedRows);
+          else resolve(results.affectedRows);
         })
       })
     },
