@@ -20,7 +20,7 @@
     "url": "https://github.com/mpnkhan/mysql-layer/issues"
   },
   "homepage": "https://github.com/mpnkhan/mysql-layer#readme",
-  "peerDependencies": {
+  "devDependencies": {
     "mysql": "github:mysqljs/mysql"
   }
 }
